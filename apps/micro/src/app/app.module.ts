@@ -2,11 +2,10 @@ import { Module } from '@nestjs/common';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import {ConfigModule, ConfigService} from "@nestjs/config";
-import {MongooseModule} from "@nestjs/mongoose";
 import {getMongoConfig} from "../../configs/mongo.config";
+import {TypegooseModule} from "nestjs-typegoose";
 
 @Module({
   imports: [
@@ -14,12 +13,11 @@ import {getMongoConfig} from "../../configs/mongo.config";
       isGlobal: true,
       envFilePath: 'envs/.account.env'
     }),
-    MongooseModule.forRootAsync({
+    TypegooseModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: getMongoConfig
     }),
-    UserModule,
     AuthModule
   ],
   controllers: [AppController],
