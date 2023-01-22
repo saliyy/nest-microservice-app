@@ -19,7 +19,7 @@ export class AuthService {
 			passwordHash: hashSync(dto.password, genSaltSync(3))
 		});
 
-		return user.save();
+		return { email: user.email };
 	}
 
 	async findUser(email: string) {

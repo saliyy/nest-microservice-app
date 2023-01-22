@@ -1,6 +1,12 @@
 version: '3.1'
 
 services:
+  rmq:
+    image: rabbitmq:3-management
+    restart: always
+    ports:
+      - "15672:15672"
+      - "5672:5672"   
   mongo:
     container_name: mongo
     image: mongo
