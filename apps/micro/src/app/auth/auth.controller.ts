@@ -1,21 +1,14 @@
-import {
-  BadRequestException,
-  Body,
-  Controller,
-  HttpCode,
-  Post,
-  UsePipes,
-  ValidationPipe,
-} from '@nestjs/common';
 import { AuthService } from './auth.service';
 import {AccountLogin, AccountRegister} from '@micro/contracts';
+import {RMQRoute, RMQValidate} from "nestjs-rmq";
+import {BadRequestException, Body, Controller} from "@nestjs/common";
 
-@Controller('auth')
+@Controller()
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
-  @UsePipes(new ValidationPipe())
-  @Post('register')
+  @RMQRoute(AccountRegister.topic)
+  @RMQValidate()
   async register(@Body() dto: AccountRegister.Request): Promise<AccountRegister.Response> {
     const userSuchEmailExists = await this.authService.findUser(dto.login);
 
@@ -26,9 +19,8 @@ export class AuthController {
     return this.authService.createUser(dto);
   }
 
-  @UsePipes(new ValidationPipe())
-  @HttpCode(200)
-  @Post('login')
+  @RMQRoute(AccountLogin.topic)
+  @RMQValidate()
   async login(@Body() dto: AccountLogin.Request): Promise<AccountLogin.Response> {
     const { email } = await this.authService.validateUser(
       dto.login,
