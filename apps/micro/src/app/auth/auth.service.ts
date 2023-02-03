@@ -39,11 +39,11 @@ export class AuthService {
 			throw new BadRequestException('incorrect password');
 		}
 
-		return { email: user.email };
+		return { email: user.email, id: user.id };
 	}
 
-	async login(email: string) {
-		const payload = { email };
+	async login(email: string, id: number) {
+		const payload = { email, id };
 
 		return {
 			access_token: await this.jwtService.sign(payload)

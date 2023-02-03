@@ -6,3 +6,4 @@ export class AppService {
     return { message: 'Welcome to micro!' };
   }
 }
+

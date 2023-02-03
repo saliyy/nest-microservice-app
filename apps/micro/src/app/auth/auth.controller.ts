@@ -22,11 +22,11 @@ export class AuthController {
   @RMQRoute(AccountLogin.topic)
   @RMQValidate()
   async login(@Body() dto: AccountLogin.Request): Promise<AccountLogin.Response> {
-    const { email } = await this.authService.validateUser(
+    const { email, id } = await this.authService.validateUser(
       dto.login,
       dto.password
     );
 
-    return this.authService.login(email);
+    return this.authService.login(email, id);
   }
 }
