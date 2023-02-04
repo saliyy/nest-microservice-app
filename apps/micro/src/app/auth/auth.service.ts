@@ -19,11 +19,13 @@ export class AuthService {
 			passwordHash: hashSync(dto.password, genSaltSync(3))
 		});
 
+    await user.save()
+
 		return { email: user.email };
 	}
 
 	async findUser(email: string) {
-		return this.userModel.findOne({ email: email }).exec();
+		return await this.userModel.findOne({ email: email }).exec();
 	}
 
 	async validateUser(login: string, password: string) {
