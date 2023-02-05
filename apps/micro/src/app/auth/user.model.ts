@@ -1,10 +1,15 @@
 import {Base, TimeStamps} from '@typegoose/typegoose/lib/defaultClasses';
 import {prop} from '@typegoose/typegoose';
+import {PurchaseState, UserRole} from "@micro/contracts";
 
 
-export enum UserRole {
-  Teacher = 'Teacher',
-  Student = 'Student'
+
+export interface UserCoursesModel extends Base {}
+
+export class UserCoursesModel
+{
+  @prop({ enum: PurchaseState, required: true, type: String })
+  purchaseState: PurchaseState
 }
 
 
@@ -22,4 +27,7 @@ export class UserModel extends TimeStamps {
 
 	@prop()
 	passwordHash: string;
+
+  @prop({ type: () => [UserCoursesModel], required: false })
+  courses?: UserCoursesModel[];
 }

@@ -1,5 +1,4 @@
 import { Module } from '@nestjs/common';
-import { AuthController } from './auth.controller';
 import {TypegooseModule} from 'nestjs-typegoose';
 import {UserModel} from './user.model';
 import { AuthService } from './auth.service';
@@ -8,9 +7,11 @@ import {ConfigModule, ConfigService} from '@nestjs/config';
 import {PassportModule} from '@nestjs/passport';
 import {JwtStrategy} from './strategies/jwt.strategy';
 import {getJwtConfig} from "../../../configs/jwt.config";
+import {UserCommands} from "./user.commands";
+import {UserQueries} from "./user.queries";
 
 @Module({
-  controllers: [AuthController],
+  controllers: [UserCommands, UserQueries],
   imports: [
 		TypegooseModule.forFeature([
 			{

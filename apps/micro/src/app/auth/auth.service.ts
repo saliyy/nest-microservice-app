@@ -28,6 +28,10 @@ export class AuthService {
 		return await this.userModel.findOne({ email: email }).exec();
 	}
 
+  async findUserById(id: string) {
+    return await this.userModel.findById(id).select(['-passwordHash']).exec();
+  }
+
 	async validateUser(login: string, password: string) {
 		const user = await this.findUser(login);
 

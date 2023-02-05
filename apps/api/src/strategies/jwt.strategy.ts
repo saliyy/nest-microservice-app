@@ -1,6 +1,6 @@
 import { ConfigService } from '@nestjs/config'
 import { PassportStrategy } from '@nestjs/passport'
-import IAuthJwtPayload from 'libs/contracts/src/lib/account/auth/auth.payload'
+import IAuthJwtPayload from 'libs/contracts/src/lib/account/commands/auth/auth.payload'
 import { ExtractJwt, Strategy } from 'passport-jwt'
 
 export class JwtStrategy extends PassportStrategy(Strategy) {
