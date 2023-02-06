@@ -1,5 +1,5 @@
 import {IsString} from "class-validator";
-import IUser from "../../../../../interfaces/src/lib/user/user.interface";
+import {IUser} from "@micro/interfaces";
 
 export namespace UserGetInfoQuery {
   export const topic = 'user.get-info.query'
