@@ -5,6 +5,7 @@ import {ModelType} from '@typegoose/typegoose/lib/types';
 import {CreateUserDto} from './dto/create-user.dto';
 import {compare, genSaltSync, hashSync} from 'bcrypt';
 import {JwtService} from '@nestjs/jwt';
+import {IUser} from "@micro/interfaces";
 
 @Injectable()
 export class AuthService {
@@ -28,7 +29,7 @@ export class AuthService {
 		return await this.userModel.findOne({ email: email }).exec();
 	}
 
-  async findUserById(id: string) {
+  async findUserById(id: string): Promise<Omit<IUser, 'passwordHash'>> {
     return await this.userModel.findById(id).select(['-passwordHash']).exec();
   }
 
