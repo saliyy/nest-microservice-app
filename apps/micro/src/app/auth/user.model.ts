@@ -1,25 +1,25 @@
-import {Base, TimeStamps} from '@typegoose/typegoose/lib/defaultClasses';
+import {TimeStamps} from '@typegoose/typegoose/lib/defaultClasses';
 import {prop} from '@typegoose/typegoose';
-import {PurchaseState, UserRole} from "@micro/contracts";
+import {IUser, IUserCourses, PurchaseState, UserRole} from "@micro/interfaces";
 
 
-
-export interface UserCoursesModel extends Base {}
-
-export class UserCoursesModel
+export class UserCoursesModel implements IUserCourses
 {
-  @prop({ enum: PurchaseState, required: true, type: String })
+  @prop({ type: String })
+  courseId;
+
+  @prop({ enum: PurchaseState, required: true, type: () => String, default: PurchaseState.Started })
   purchaseState: PurchaseState
 }
 
+export class UserModel extends TimeStamps implements IUser {
 
-export interface UserModel extends Base {}
-export class UserModel extends TimeStamps {
+  @prop({ index: true })
+  _id: string;
   @prop()
-  name?: string;
+  displayName?: string;
 
-
-  @prop({ enum: UserRole })
+  @prop({ enum: UserRole, type: () => String, default: UserRole.Student })
   role: UserRole
 
 	@prop({ unique: true })

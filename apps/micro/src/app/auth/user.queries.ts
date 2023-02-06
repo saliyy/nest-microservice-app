@@ -9,7 +9,7 @@ export class UserQueries {
 
   @RMQRoute(UserGetInfoQuery.topic)
   @RMQValidate()
-  async getUserInfo(@Body() { id }: UserGetInfoQuery.Request) {
+  async getUserInfo(@Body() { id }: UserGetInfoQuery.Request): Promise<UserGetInfoQuery.Response> {
     const user = await this.authService.findUserById(id);
 
     return { user }
@@ -17,7 +17,7 @@ export class UserQueries {
 
   @RMQRoute(UserGetCoursesQuery.topic)
   @RMQValidate()
-  async getUserCourses(@Body() { id }: UserGetCoursesQuery.Request) {
+  async getUserCourses(@Body() { id }: UserGetCoursesQuery.Request): Promise<UserGetCoursesQuery.Response> {
     const user = await this.authService.findUserById(id);
 
     return {

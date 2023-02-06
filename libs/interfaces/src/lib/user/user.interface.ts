@@ -12,11 +12,11 @@ export enum PurchaseState {
 }
 
 export interface IUserCourses {
-    _id: string;
+    courseId: string,
     purchaseState: PurchaseState
 }
 
-export default interface IUser {
+export interface IUser {
   _id: string;
   displayName?: string,
   email: string;
