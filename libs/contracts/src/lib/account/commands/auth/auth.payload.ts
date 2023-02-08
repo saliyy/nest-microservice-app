@@ -1,4 +1,4 @@
-export default interface IAuthJwtPayload {
+export interface IAuthJwtPayload {
     id: number
     email?: string
 }

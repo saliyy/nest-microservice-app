@@ -1,32 +1,30 @@
-import { AuthService } from './auth.service';
-import {AccountLogin, AccountRegister} from '@micro/contracts';
 import {RMQRoute, RMQValidate} from "nestjs-rmq";
+import {UserChangeProfileCommand} from "@micro/contracts";
 import {BadRequestException, Body, Controller} from "@nestjs/common";
+import {UserRepository} from "./user.repository";
+import {UserEntity} from "./user.entity";
 
 @Controller()
 export class UserCommands {
-  constructor(private readonly authService: AuthService) {}
-
-  @RMQRoute(AccountRegister.topic)
+  constructor(
+    private readonly userRepository: UserRepository
+  ) {}
+  @RMQRoute(UserChangeProfileCommand.topic)
   @RMQValidate()
-  async register(@Body() dto: AccountRegister.Request): Promise<AccountRegister.Response> {
-    const userSuchEmailExists = await this.authService.findUser(dto.login);
+  async updateProfile(@Body() dto: UserChangeProfileCommand.Request): Promise<UserChangeProfileCommand.Response> {
+    const userToUpdate = await this.userRepository.findUserById(dto.id);
 
-    if (userSuchEmailExists) {
-      throw new BadRequestException('user such email already exists!');
+    if (!userToUpdate) {
+      throw new BadRequestException('user to update not found');
     }
 
-    return this.authService.createUser(dto);
-  }
+    const updatedProfile = new UserEntity(userToUpdate).updateProfile(dto.displayName, dto.role)
 
-  @RMQRoute(AccountLogin.topic)
-  @RMQValidate()
-  async login(@Body() dto: AccountLogin.Request): Promise<AccountLogin.Response> {
-    const { email, id } = await this.authService.validateUser(
-      dto.login,
-      dto.password
-    );
+    await this.userRepository.updateUser(updatedProfile)
 
-    return this.authService.login(email, id);
+    return {
+      user: updatedProfile
+    }
   }
 }
+

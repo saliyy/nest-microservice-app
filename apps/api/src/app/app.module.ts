@@ -6,6 +6,7 @@ import { RMQModule } from "nestjs-rmq";
 import { getJwtConfig } from "../configs/configs/jwt.config";
 import { getRMQConfig } from "../configs/configs/rmq.config";
 import { AuthController } from "../controllers/auth.controller";
+import {UserController} from "../controllers/user.controller";
 
 
 @Module({
@@ -19,7 +20,7 @@ import { AuthController } from "../controllers/auth.controller";
         }),
         PassportModule
     ],
-    controllers: [AuthController]
+    controllers: [AuthController, UserController]
 })
 
 
