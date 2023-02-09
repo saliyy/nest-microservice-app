@@ -1,7 +1,7 @@
 import {UserGetCoursesQuery, UserGetInfoQuery} from '@micro/contracts';
 import {RMQRoute, RMQValidate} from "nestjs-rmq";
 import {Body, Controller} from "@nestjs/common";
-import {UserRepository} from "./user.repository";
+import {UserRepository} from "../user.repository";
 
 @Controller()
 export class UserQueries {

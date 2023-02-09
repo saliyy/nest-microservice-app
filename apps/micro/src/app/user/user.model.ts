@@ -1,4 +1,4 @@
-import {TimeStamps} from '@typegoose/typegoose/lib/defaultClasses';
+import {Base, TimeStamps} from '@typegoose/typegoose/lib/defaultClasses';
 import {prop} from '@typegoose/typegoose';
 import {IUser, IUserCourses, PurchaseState, UserRole} from "@micro/interfaces";
 
@@ -13,9 +13,6 @@ export class UserCoursesModel implements IUserCourses
 }
 
 export class UserModel extends TimeStamps implements IUser {
-
-  @prop({ index: true })
-  _id: string;
   @prop()
   displayName?: string;
 

@@ -1,6 +1,5 @@
 import {Injectable} from "@nestjs/common";
 import {IUser, IUserCourses, UserRole} from "@micro/interfaces";
-import {UserChangeProfileCommand} from "@micro/contracts";
 
 @Injectable()
 export class UserEntity implements IUser {

@@ -1,8 +1,8 @@
 import {BadRequestException, Injectable} from '@nestjs/common';
 import {InjectModel} from 'nestjs-typegoose';
-import {UserModel} from './user.model';
+import {UserModel} from '../user/user.model';
 import {ModelType} from '@typegoose/typegoose/lib/types';
-import {CreateUserDto} from './dto/create-user.dto';
+import {CreateUserDto} from '../user/dtos/create-user.dto';
 import {compare, genSaltSync, hashSync} from 'bcrypt';
 import {JwtService} from '@nestjs/jwt';
 

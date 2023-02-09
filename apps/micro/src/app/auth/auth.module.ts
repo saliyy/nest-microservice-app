@@ -1,17 +1,17 @@
 import { Module } from '@nestjs/common';
 import {TypegooseModule} from 'nestjs-typegoose';
-import {UserModel} from './user.model';
+import {UserModel} from '../user/user.model';
 import { AuthService } from './auth.service';
 import {JwtModule} from '@nestjs/jwt';
 import {ConfigModule, ConfigService} from '@nestjs/config';
-import {PassportModule} from '@nestjs/passport';
-import {JwtStrategy} from '../../../../api/src/strategies/jwt.strategy';
-import {getJwtConfig} from "../../../configs/jwt.config";
-import {UserCommands} from "./user.commands";
-import {UserQueries} from "./user.queries";
+import {getJwtConfig} from "../../configs/jwt.config";
+import {UserCommands} from "../user/commands/user.commands";
+import {UserQueries} from "../user/queries/user.queries";
+import {UserRepository} from "../user/user.repository";
+import {AuthCommands} from "./auth.commands";
 
 @Module({
-  controllers: [UserCommands, UserQueries],
+  controllers: [UserCommands, UserQueries, AuthCommands],
   imports: [
 		TypegooseModule.forFeature([
 			{
@@ -26,9 +26,8 @@ import {UserQueries} from "./user.queries";
 		  imports: [ConfigModule],
 		  inject: [ConfigService],
 		  useFactory: getJwtConfig
-	  }),
-	  PassportModule
+	  })
   ],
-  providers: [AuthService, JwtStrategy]
+  providers: [AuthService, UserRepository]
 })
 export class AuthModule {}

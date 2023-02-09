@@ -1,5 +1,5 @@
 import { AuthService } from './auth.service';
-import {AccountLogin, AccountRegister, UserChangeProfileCommand} from '@micro/contracts';
+import {AccountLogin, AccountRegister} from '@micro/contracts';
 import {RMQRoute, RMQValidate} from "nestjs-rmq";
 import {BadRequestException, Body, Controller} from "@nestjs/common";
 

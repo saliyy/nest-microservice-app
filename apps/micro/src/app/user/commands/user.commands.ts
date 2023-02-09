@@ -1,8 +1,8 @@
 import {RMQRoute, RMQValidate} from "nestjs-rmq";
 import {UserUpdateProfileCommand} from "@micro/contracts";
 import {BadRequestException, Body, Controller} from "@nestjs/common";
-import {UserRepository} from "./user.repository";
-import {UserEntity} from "./user.entity";
+import {UserRepository} from "../user.repository";
+import {UserEntity} from "../user.entity";
 
 @Controller()
 export class UserCommands {
