@@ -4,3 +4,5 @@ export * from './lib/account/commands/auth/auth.payload';
 export * from './lib/account/queries/user.get-info.query';
 export * from './lib/account/queries/user.get-courses.query';
 export * from './lib/account/commands/user/user.change-profile.command';
+export * from './lib/courses/queries/course.get-info.query';
+export * from './lib/payment/commands/payment.generate-link.command';
