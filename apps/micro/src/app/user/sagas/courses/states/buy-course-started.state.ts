@@ -1,7 +1,7 @@
 import {BuyCourseState} from "./buy-course.state";
 import {BuyCourseSaga} from "../buy-course.saga";
 import {UserEntity} from "../../../user.entity";
-import {CourseGetInfoQuery, PaymentGenerateLinkCommand} from "@micro/contracts";
+import {CourseGetInfoQuery, PaymentGenerateLinkCommand, PaymentStatus} from "@micro/contracts";
 import {PurchaseState} from "@micro/interfaces";
 
 export class BuyCourseStartedState extends BuyCourseState {
@@ -39,7 +39,7 @@ export class BuyCourseStartedState extends BuyCourseState {
     return this.saga.user
   }
 
-  async checkPayment(): Promise<UserEntity> {
+  async checkPayment():  Promise<{ user: UserEntity; status: PaymentStatus }> {
     throw new Error("Cannot cancel not purchased course")
   }
 

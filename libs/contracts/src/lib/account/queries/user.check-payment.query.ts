@@ -1,10 +1,8 @@
 import {IsString} from "class-validator";
+import {PaymentStatus} from "../../payment/queries/payment.check-status.query";
 
-export type PaymentStatus = 'canceled' | 'success' | 'progress';
-
-
-export namespace PaymentCheckStatusQuery {
-  export const topic = 'payment.check-status.query'
+export namespace UserCheckPaymentQuery {
+  export const topic = 'user.check-payment.query';
 
   export class Request {
     @IsString()

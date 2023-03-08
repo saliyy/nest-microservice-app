@@ -8,3 +8,5 @@ export * from './lib/courses/queries/course.get-info.query';
 export * from './lib/payment/commands/payment.generate-link.command';
 export * from './lib/payment/commands/payment.generate-link.command';
 export * from './lib/payment/queries/payment.check-status.query'
+export * from './lib/account/commands/user/user.buy-course.command'
+export * from './lib/account/queries/user.check-payment.query'

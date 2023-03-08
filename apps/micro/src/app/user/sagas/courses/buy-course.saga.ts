@@ -37,6 +37,6 @@ export class BuyCourseSaga {
 
 
   public updateStatus(status: PurchaseState) {
-    this.user.updateCourseStatus(this.courseId, status)
+    this.user.setCourseStatus(this.courseId, status)
   }
 }

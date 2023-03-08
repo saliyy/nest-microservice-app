@@ -2,6 +2,7 @@ import {BuyCourseState} from "./buy-course.state";
 import {BuyCourseSaga} from "../buy-course.saga";
 import {UserEntity} from "../../../user.entity";
 import {PurchaseState} from "@micro/interfaces";
+import {PaymentStatus} from "@micro/contracts";
 
 export class BuyCourseCanceledState extends BuyCourseState {
   public constructor(saga: BuyCourseSaga) {
@@ -17,7 +18,7 @@ export class BuyCourseCanceledState extends BuyCourseState {
     throw new Error("course already canceled")
   }
 
-  async checkPayment(): Promise<UserEntity> {
+  async checkPayment(): Promise<{ user: UserEntity; status: PaymentStatus }>{
     throw new Error("cannot check payment on canceled course")
   }
 
