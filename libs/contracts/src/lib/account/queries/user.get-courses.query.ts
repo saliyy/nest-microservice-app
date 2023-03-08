@@ -2,7 +2,7 @@ import {IsString} from "class-validator";
 import {IUserCourses} from "@micro/interfaces";
 
 export namespace UserGetCoursesQuery {
-  export const topic = 'user.get-courses.query'
+  export const topic = 'user.get-courses.queries'
 
   export class Request {
     @IsString()

@@ -33,7 +33,7 @@ export class UserEntity implements IUser {
     this.courses = this.courses.filter((course) => course.courseId === courseId)
   }
 
-  public updateCourseStatus(courseId: string, status: PurchaseState): IUserCourses|never {
+  public updateCourseStatus(courseId: string, status: PurchaseState = PurchaseState.Started): IUserCourses|never {
     const courseToUpdate = this.courses.find((course) => course.courseId === courseId)
 
     if (!courseToUpdate) {
