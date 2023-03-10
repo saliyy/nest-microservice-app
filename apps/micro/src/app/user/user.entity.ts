@@ -1,5 +1,6 @@
 import {Injectable} from "@nestjs/common";
-import {IUser, IUserCourses, PurchaseState, UserRole} from "@micro/interfaces";
+import {IDomainEvent, IUser, IUserCourses, PurchaseState, UserRole} from "@micro/interfaces";
+import {UserChangedCourseEvent} from "@micro/contracts";
 
 @Injectable()
 export class UserEntity implements IUser {
@@ -9,6 +10,9 @@ export class UserEntity implements IUser {
   email: string;
   passwordHash: string;
   role: UserRole;
+
+  // domain events
+  domainEvents: IDomainEvent[] = [];
 
   constructor(user: IUser) {
     this._id          = user._id
@@ -53,6 +57,10 @@ export class UserEntity implements IUser {
       }
       return c;
     });
+    this.domainEvents.push({
+      topic: UserChangedCourseEvent.topic,
+      data: UserChangedCourseEvent.Event
+    })
   }
 
   public getCourseState(courseId: string): PurchaseState {

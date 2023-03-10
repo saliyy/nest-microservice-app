@@ -9,6 +9,8 @@ import {UserCommands} from "../user/commands/user.commands";
 import {UserQueries} from "../user/queries/user.queries";
 import {UserRepository} from "../user/user.repository";
 import {AuthCommands} from "./auth.commands";
+import UserDomainEventEmitter from "../user/events/UserDomainEventEmitter";
+import {UserService} from "../user/services/user.service";
 
 @Module({
   controllers: [UserCommands, UserQueries, AuthCommands],
@@ -28,6 +30,6 @@ import {AuthCommands} from "./auth.commands";
 		  useFactory: getJwtConfig
 	  })
   ],
-  providers: [AuthService, UserRepository]
+  providers: [AuthService, UserRepository, UserDomainEventEmitter, UserService]
 })
 export class AuthModule {}
