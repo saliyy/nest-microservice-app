@@ -59,7 +59,7 @@ export class UserEntity implements IUser {
     });
     this.domainEvents.push({
       topic: UserChangedCourseEvent.topic,
-      data: UserChangedCourseEvent.Event
+      data: { userId: this._id, courseId: courseId, status: state} as UserChangedCourseEvent.Event
     })
   }
 
